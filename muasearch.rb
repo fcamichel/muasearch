@@ -21,7 +21,7 @@ def mobile_online?(site_url)
   begin
     uri = URI.parse(site_url)
     data = uri.read
-    if data.scan('XHTML Mobile') != []
+    if data.scan('XHTML Mobile') != [] or data.scan('mobile') != []
       true
     else
       false
@@ -61,6 +61,10 @@ if website_online?(url.to_s)
   mobile = 0
   # check if there is an mobile site (m.)
   if mobile_online?(url.sub("www.", "m.").to_s)
+    mobile += 1   
+  end
+  # check if there is an mobile site (mobile.)
+  if mobile_online?(url.sub("www.", "mobile.").to_s)
     mobile += 1   
   end
   # check if there is an mobile site (/mobile)
